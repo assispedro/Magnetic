@@ -94,7 +94,7 @@ open class Node: MaskNode {
         super.init(circleOfRadius: radius)
         
         self.physicsBody = {
-            let body = SKPhysicsBody(circleOfRadius: radius + 2)
+            let body = SKPhysicsBody(circleOfRadius: radius + 5)
             body.allowsRotation = false
             body.friction = 0
             body.linearDamping = 3
@@ -127,7 +127,7 @@ open class Node: MaskNode {
      The animation to execute when the node is selected.
      */
     open func selectedAnimation() {
-        run(.scale(to: 4/3, duration: 0.2))
+        run(.scale(to: 1, duration: 0.2))
         if let texture = texture {
             sprite.run(.setTexture(texture))
         }
@@ -156,7 +156,7 @@ open class Node: MaskNode {
 
 open class MaskNode: SKShapeNode {
     
-    let mask: SKCropNode
+    public let mask: SKCropNode
     let maskOverlay: SKShapeNode
     
     public init(circleOfRadius radius: CGFloat) {
