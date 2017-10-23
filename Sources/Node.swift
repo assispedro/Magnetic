@@ -10,6 +10,8 @@ import SpriteKit
 
 open class Node: MaskNode {
     
+    
+    
     public lazy var label: SKMultilineLabelNode = { [unowned self] in
         let label = SKMultilineLabelNode()
         label.fontName = "Avenir-Black"
@@ -37,6 +39,7 @@ open class Node: MaskNode {
         get { return label.text }
         set { label.text = newValue }
     }
+    open var object: Any?
     
     /**
      The image displayed by the node.
@@ -90,7 +93,7 @@ open class Node: MaskNode {
      
      - Returns: A new node.
      */
-    public init(text: String?, image: UIImage?, color: UIColor, radius: CGFloat) {
+    public init(text: String?, image: UIImage?, color: UIColor, radius: CGFloat, object: Any) {
         super.init(circleOfRadius: radius)
         
         self.physicsBody = {
@@ -102,6 +105,7 @@ open class Node: MaskNode {
         }()
         self.fillColor = .white
         self.strokeColor = .white
+        self.object = object
         _ = self.sprite
         _ = self.text
         configure(text: text, image: image, color: color)
@@ -127,9 +131,8 @@ open class Node: MaskNode {
      The animation to execute when the node is selected.
      */
     open func selectedAnimation() {
-        run(.scale(to: 1, duration: 0.2))
-        if let texture = texture {
-            sprite.run(.setTexture(texture))
+        if let texture = self.texture {
+            self.sprite.run(.setTexture(texture))
         }
     }
     
